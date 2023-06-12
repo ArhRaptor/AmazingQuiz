@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+
+    <TextView
+        android:id="@+id/tv_greetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d_16"
+        android:layout_marginTop="@dimen/d_16"
+        android:text="@string/greetings"
+        android:textSize="@dimen/s_18"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d_16"
+        android:text="@string/dear_user"
+        android:textSize="@dimen/s_25"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_greetings" />
+
+    <ImageView
+        android:id="@+id/iv_user_photo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="@dimen/d_16"
+        android:src="@drawable/ic_user"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_user_name" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_statistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/d_16"
+        app:cardElevation="@dimen/d_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_photo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/d_16">
+
+            <TextView
+                android:id="@+id/tv_about_you"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_score"
+                android:textSize="@dimen/s_18"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_head_total_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_8"
+                android:text="@string/total_score"
+                android:textSize="@dimen/s_12"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_about_you"/>
+
+            <TextView
+                android:id="@+id/tv_total_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/s_18"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_marginStart="@dimen/d_8"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_head_total_score"
+                app:layout_constraintStart_toEndOf="@+id/tv_head_total_score"
+                app:layout_constraintTop_toTopOf="@+id/tv_head_total_score"
+                android:text="@string/_0" />
+
+            <TextView
+                android:id="@+id/tv_head_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_8"
+                android:text="@string/your_rank"
+                android:textSize="@dimen/s_12"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_head_total_score"/>
+
+            <RatingBar
+                android:id="@+id/rb_rank"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_marginTop="@dimen/d_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_head_rank"/>
+
+            <TextView
+                android:id="@+id/tv_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/beginner"
+                android:textAllCaps="true"
+                android:textSize="22sp"
+                android:layout_marginStart="@dimen/d_8"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_rank"
+                app:layout_constraintStart_toEndOf="@+id/rb_rank"
+                app:layout_constraintTop_toTopOf="@+id/rb_rank" />
+
+            <TextView
+                android:id="@+id/tv_score_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_8"
+                tools:text="100"
+                android:textSize="@dimen/s_12"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rb_rank"/>
+
+            <TextView
+                android:id="@+id/tv_score_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/points_left_until_the_next_level"
+                android:textSize="@dimen/s_12"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/d_4"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_score_left"
+                app:layout_constraintStart_toEndOf="@+id/tv_score_left"
+                app:layout_constraintTop_toTopOf="@+id/tv_score_left" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_16"
+        android:text="@string/start_quiz"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_statistics" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

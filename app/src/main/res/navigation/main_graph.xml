@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/distributorFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        tools:layout="@layout/fragment_main"
+        android:name="by.quizzes.amazingquiz.ui.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        tools:layout="@layout/fragment_setting"
+        android:name="by.quizzes.amazingquiz.ui.setting.SettingFragment"
+        android:label="SettingFragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_fragmentQuiz"
+            app:destination="@id/fragmentQuiz" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentQuiz"
+        tools:layout="@layout/fragment_quiz"
+        android:name="by.quizzes.amazingquiz.ui.quiz.QuizFragment"
+        android:label="FragmentQuiz" >
+        <action
+            android:id="@+id/action_fragmentQuiz_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        tools:layout="@layout/fragment_result"
+        android:name="by.quizzes.amazingquiz.ui.result.ResultFragment"
+        android:label="ResultFragment" >
+        <action
+            android:id="@+id/action_resultFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authorizationFragment"
+        tools:layout ="@layout/fragment_authorization"
+        android:name="by.quizzes.amazingquiz.ui.authorization.AuthorizationFragment"
+        android:label="AuthorizationFragment" >
+        <action
+            android:id="@+id/action_authorizationFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_authorizationFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        tools:layout="@layout/fragment_registration"
+        android:name="by.quizzes.amazingquiz.ui.registration.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verificationFragment"
+        tools:layout="@layout/fragment_verification"
+        android:name="by.quizzes.amazingquiz.ui.verification.VerificationFragment"
+        android:label="VerificationFragment" >
+        <action
+            android:id="@+id/action_verificationFragment_to_registrationStep2Fragment"
+            app:destination="@id/registrationStep2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationStep2Fragment"
+        tools:layout="@layout/fragment_registration_step2"
+        android:name="by.quizzes.amazingquiz.ui.registrationstep2.RegistrationStep2Fragment"
+        android:label="RegistrationStep2Fragment" >
+        <action
+            android:id="@+id/action_registrationStep2Fragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/distributorFragment"
+        android:name="by.quizzes.amazingquiz.ui.distributor.DistributorFragment"
+        android:label="DistributorFragment"
+        tools:layout="@layout/fragment_distributor">
+        <action
+            android:id="@+id/action_distributorFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_distributorFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>

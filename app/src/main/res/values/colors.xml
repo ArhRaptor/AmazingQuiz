@@ -2,5 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    <color name="green">#006100</color>
+    <color name="red">#d60003</color>
+    <color name="et_background_color">#FBEEFF</color>
+    <color name="link_color">#4b78ff</color>
+    <color name="background">#d8cbf7</color>
+    <color name="background_transparent">#99d8cbf7</color>
 </resources>
