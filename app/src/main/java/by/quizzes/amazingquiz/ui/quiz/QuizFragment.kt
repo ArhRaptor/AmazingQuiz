@@ -17,11 +17,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.quizzes.amazingquiz.MyApp
 import by.quizzes.amazingquiz.R
 import by.quizzes.amazingquiz.databinding.FragmentQuizBinding
 import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class QuizFragment : Fragment() {
@@ -173,7 +176,7 @@ class QuizFragment : Fragment() {
         }
 
         binding?.cvAnswer2?.setOnClickListener {
-           setAnswerCardText()
+            setAnswerCardText()
             selectedCard = binding?.cvAnswer2
             binding?.btnNextQuiz?.isEnabled = true
         }
@@ -192,50 +195,47 @@ class QuizFragment : Fragment() {
 
         binding?.btnNextQuiz?.setOnClickListener {
 
-            val layout = selectedCard?.getChildAt(0) as LinearLayout
+            lifecycleScope.launch {
+                val layout = selectedCard?.getChildAt(0) as LinearLayout
 
-            for (i in 0 until layout.childCount) {
-                val innerChild = layout.getChildAt(i)
-                if (innerChild is TextView) {
-                    val userAnswer = innerChild.text.toString()
-                    var score = 2
-                    if (correctCard == selectedCard) {
-                        when (currentDifficulty) {
-                            "medium" -> {
-                                score += 2
-                            }
+                for (i in 0 until layout.childCount) {
+                    val innerChild = layout.getChildAt(i)
+                    if (innerChild is TextView) {
+                        val userAnswer = innerChild.text.toString()
+                        var score = 2
+                        if (correctCard == selectedCard) {
+                            when (currentDifficulty) {
+                                "medium" -> {
+                                    score += 2
+                                }
 
-                            "hard" -> {
-                                score += 3
+                                "hard" -> {
+                                    score += 3
+                                }
                             }
+                        } else {
+                            score = 0
                         }
-                    } else {
-                        score = 0
+                        viewModel.setUserAnswer(currentQuestion, score, userAnswer)
                     }
-                    viewModel.setUserAnswer(currentQuestion, score, userAnswer)
                 }
-            }
 
-            binding?.btnNextQuiz?.isEnabled = false
-            setAnimation(selectedCard, true)
-            if (correctCard != selectedCard) {
-                Handler(Looper.getMainLooper()).postDelayed({
+                binding?.btnNextQuiz?.isEnabled = false
+                setAnimation(selectedCard, true)
+                if (correctCard != selectedCard) {
+                    delay(1100)
                     setAnimation(correctCard, true)
-                }, 1800)
-            }
-
-            Handler(Looper.getMainLooper()).postDelayed({
+                }
+                delay(2200)
                 setAnimation(selectedCard, false)
                 if (selectedCard != correctCard) {
                     setAnimation(correctCard, false)
                 }
-            }, 3800)
-
-            Handler(Looper.getMainLooper()).postDelayed({
+                delay(1500)
                 selectedCard = null
                 correctCard = null
                 viewModel.getNextQuiz()
-            }, 6200)
+            }
         }
     }
 
@@ -292,7 +292,7 @@ class QuizFragment : Fragment() {
         cardView.cameraDistance = cameraDist
 
         val animator = ObjectAnimator.ofFloat(cardView, "rotationY", rotationValue1, rotationValue2)
-        animator.duration = 1500
+        animator.duration = 1000
 
         animator.addUpdateListener {
             val animatedValue = it.animatedValue as Float

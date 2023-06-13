@@ -11,7 +11,7 @@ class VerificationViewModel (private val firebaseRepository: FirebaseRepository)
 
     fun sentVerificationMessage(){
         firebaseRepository.sentVerificationMessage {
-            message.value = "Account verification email has been sent!"
+            message.value = it
         }
     }
 

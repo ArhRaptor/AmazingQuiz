@@ -1,6 +1,5 @@
 package by.quizzes.amazingquiz.repository
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.actionCodeSettings
 import com.google.firebase.auth.ktx.auth
@@ -30,8 +29,6 @@ class FirebaseRepository @Inject constructor(
                 onError(task.exception?.localizedMessage ?: "")
             }
         }
-
-
     }
 
     fun registration(
@@ -49,38 +46,17 @@ class FirebaseRepository @Inject constructor(
         }
     }
 
-    fun sentVerificationMessage(onSentMessage: () -> Unit) {
+    fun sentVerificationMessage(onSentMessage: (text: String) -> Unit) {
+        val user = auth.currentUser
 
-        val actionCodeSettings = actionCodeSettings {
-            // URL you want to redirect back to. The domain (www.example.com) for this
-            // URL must be whitelisted in the Firebase Console.
-            url = "https://www.example.com/finishSignUp?cartId=1234"
-            // This must be true
-            handleCodeInApp = true
-            setAndroidPackageName(
-                "com.example.android",
-                true, // installIfNotAvailable
-                "12", // minimumVersion
-            )
-        }
-
-        Firebase.auth.sendSignInLinkToEmail(auth.currentUser?.email?: "", actionCodeSettings)
-            .addOnCompleteListener { task ->
+        user?.sendEmailVerification()
+            ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    onSentMessage()
+                    onSentMessage("Account verification email has been sent!")
+                } else {
+                    onSentMessage(task.exception?.localizedMessage?: "")
                 }
             }
-
-
-
-/*        val user = auth.currentUser
-
-        user!!.sendEmailVerification()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    onSentMessage()
-                }
-            }*/
     }
 
     fun isVerified() = auth.currentUser?.isEmailVerified

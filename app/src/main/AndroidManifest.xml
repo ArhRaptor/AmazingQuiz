@@ -11,6 +11,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:launchMode="singleTop"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AmazingQuiz"
@@ -26,13 +27,16 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
-                <data android:scheme="https"
-                    android:host="amazingquiz-a906e.firebaseapp.com" />
-                <!-- note that the leading "/" is required for pathPrefix-->
+
+                <data
+                    android:host="amazingquiz-a906e.firebaseapp.com"
+                    android:scheme="https"
+                    android:pathPrefix="/__/auth/action" />
             </intent-filter>
+
 
         </activity>
     </application>
