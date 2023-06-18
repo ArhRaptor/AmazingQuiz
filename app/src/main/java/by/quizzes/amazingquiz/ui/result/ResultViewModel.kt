@@ -56,6 +56,7 @@ class ResultViewModel(
                 questionList.add(
                     QuestionResult(
                         question = question.question,
+                        difficulty = question.difficulty,
                         correctAnswer = question.correctAnswer,
                         myAnswer = question.userAnswer,
                         score = question.score

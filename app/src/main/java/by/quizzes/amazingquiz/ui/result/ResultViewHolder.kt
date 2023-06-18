@@ -12,12 +12,13 @@ class ResultViewHolder(val binding: ItemResultBinding): RecyclerView.ViewHolder(
     fun bind(questionResult: QuestionResult){
         binding.tvQuestion.text = questionResult.question
         binding.tvCorrectAnswer.text = questionResult.correctAnswer
+        binding.tvDifficulty.text = questionResult.difficulty
         binding.tvMyAnswer.run {
             text = questionResult.myAnswer
-            if (questionResult.correctAnswer == questionResult.question){
-                setTextColor(R.color.green)
+            if (questionResult.correctAnswer == questionResult.myAnswer){
+                setTextColor(resources.getColor(R.color.green, null))
             }else{
-                setTextColor(R.color.red)
+                setTextColor(resources.getColor(R.color.red, null))
             }
         }
         binding.tvScore.text = questionResult.score.toString()

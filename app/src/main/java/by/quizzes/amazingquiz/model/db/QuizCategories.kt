@@ -17,8 +17,10 @@ import androidx.room.PrimaryKey
 data class QuizCategories(
     @PrimaryKey(autoGenerate = true)
     val id: Long? = null,
-    @ColumnInfo("value")
-    val value: String,
+    @ColumnInfo("name")
+    val name: String,
+    @ColumnInfo("is_add")
+    var isAdd:Boolean = false,
     @ColumnInfo("settings_id")
     var settingsId: Long? = null
 )

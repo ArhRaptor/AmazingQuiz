@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Amazing Quiz</string>
     <string name="settings">Settings</string>
-    <string name="start_quiz">Start quiz</string>
+    <string name="start_quiz">Start new quiz</string>
     <string name="next">Next</string>
     <string name="quiz_settings">Quiz Settings</string>
     <string name="limit">Limit</string>
@@ -9,7 +9,7 @@
     <string name="difficulty">Difficulty</string>
     <string name="categories">Categories</string>
     <string name="cb_timer_text">Use the timer (your points will be increased by 2 times).</string>
-    <string name="times_is_up">Times is up!</string>
+    <string name="times_is_up">Time is up!</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="password_again">Password again</string>
@@ -47,4 +47,14 @@
     <string name="back_to_main_menu">Back to main menu</string>
     <string name="total_score">Total score:</string>
     <string name="_0">0</string>
+    <string name="your_favorite_themes">My favorite themes</string>
+    <string name="cont">Continue</string>
+    <string name="yes">Yes, I Do!</string>
+    <string name="no">No, continue</string>
+    <string name="difficulty_card">Difficulty:</string>
+    <string name="meeting_text">I’ve been looking forward to meeting you. What is your name?</string>
+    <string name="hello">Greetings, dear user!!!</string>
+    <string name="nice_to_meet_you">Nice to meet you!</string>
+    <string name="correct_difficulty">Choose the correct difficulty.</string>
+    <string name="question_card">Question:</string>
 </resources>

@@ -5,11 +5,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -31,11 +30,18 @@ class QuizFragment : Fragment() {
 
     @Inject
     lateinit var quizViewModelProvider: QuizViewModelProvider
+    private var countDownTimer: CountDownTimer? = null
 
     private var binding: FragmentQuizBinding? = null
     private val viewModel: QuizViewModel by viewModels {
         quizViewModelProvider
     }
+
+    private var currentQuestion: String? = null
+    private var currentDifficulty: String? = null
+    private var selectedCard: MaterialCardView? = null
+    private var correctCard: MaterialCardView? = null
+    private var isTimer = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,26 +61,41 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var currentQuestion: String? = null
-        var currentDifficulty: String? = null
-        var selectedCard: MaterialCardView? = null
-        var correctCard: MaterialCardView? = null
-
         viewModel.isTimer.observe(viewLifecycleOwner) {
             if (it == true) {
                 binding?.timer?.visibility = VISIBLE
+                isTimer = true
 
-                object : CountDownTimer(6000, 1) {
-                    override fun onTick(milliseconds: Long) {
-                        val seconds = milliseconds / 1000
-                        val millisec = milliseconds % 100
-                        binding?.timer?.text = String.format("%02d:%02d left", seconds, millisec)
+                binding?.progressBar?.apply {
+                    max = 100
+                    progress = 100
+                }
+
+                val totalTime = 10000 // Общее время в миллисекундах
+                val interval = 1000 // Интервал обновления прогресса в миллисекундах
+
+                countDownTimer = object : CountDownTimer(totalTime.toLong(), interval.toLong()) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        val remainingTime =
+                            millisUntilFinished / 1000
+                        binding?.remainingTimeTextView?.text =
+                            remainingTime.toString()
+                        binding?.progressBar?.progress =
+                            ((millisUntilFinished.toFloat() / totalTime) * 100).toInt()
                     }
 
                     override fun onFinish() {
-                        binding?.timer?.text = getString(R.string.times_is_up)
+                        setClickableCard(false)
+                        binding?.progressBar?.visibility = INVISIBLE
+                        binding?.remainingTimeTextView?.text =
+                            resources.getString(R.string.times_is_up)
+                        viewModel.setUserAnswer(currentQuestion, getCardText(selectedCard), getCardText(correctCard), currentDifficulty, isTimer)
+                        showCorrectAnswer()
+                        binding?.progressBar?.visibility = VISIBLE
                     }
-                }.start()
+                }
+
+                countDownTimer?.start()
             }
         }
 
@@ -94,6 +115,7 @@ class QuizFragment : Fragment() {
             answers.shuffle()
 
             binding?.tvQuestion?.text = question.question
+            binding?.tvDifficulty?.text = question.difficulty
 
             binding?.tvAnswer1?.text = answers[0]
             if (answers[0] == question.correctAnswer) {
@@ -195,47 +217,69 @@ class QuizFragment : Fragment() {
 
         binding?.btnNextQuiz?.setOnClickListener {
 
-            lifecycleScope.launch {
-                val layout = selectedCard?.getChildAt(0) as LinearLayout
+            countDownTimer?.cancel()
+            setClickableCard(false)
 
-                for (i in 0 until layout.childCount) {
-                    val innerChild = layout.getChildAt(i)
-                    if (innerChild is TextView) {
-                        val userAnswer = innerChild.text.toString()
-                        var score = 2
-                        if (correctCard == selectedCard) {
-                            when (currentDifficulty) {
-                                "medium" -> {
-                                    score += 2
-                                }
+            viewModel.setUserAnswer(currentQuestion, getCardText(selectedCard), getCardText(correctCard), currentDifficulty, isTimer)
+            showCorrectAnswer()
+        }
+    }
 
-                                "hard" -> {
-                                    score += 3
-                                }
-                            }
-                        } else {
-                            score = 0
-                        }
-                        viewModel.setUserAnswer(currentQuestion, score, userAnswer)
-                    }
-                }
+    private fun getCardText(card: MaterialCardView?):String{
+        val layout = card?.getChildAt(0) as LinearLayout
 
-                binding?.btnNextQuiz?.isEnabled = false
+        for (i in 0 until layout.childCount) {
+            val innerChild = layout.getChildAt(i)
+            if (innerChild is TextView) {
+                return innerChild.text.toString()
+            }
+        }
+        return ""
+    }
+
+    private fun showCorrectAnswer() {
+        lifecycleScope.launch {
+            binding?.btnNextQuiz?.isEnabled = false
+
+            if (selectedCard == null) {
+                setAnimation(correctCard, true)
+                delay(1100)
+                setAnimation(correctCard, false)
+            }
+            if (selectedCard == correctCard) {
                 setAnimation(selectedCard, true)
-                if (correctCard != selectedCard) {
-                    delay(1100)
-                    setAnimation(correctCard, true)
-                }
+                delay(1300)
+                setAnimation(selectedCard, false)
+            }
+            if (selectedCard != correctCard && selectedCard != null) {
+                setAnimation(selectedCard, true)
+                delay(1300)
+                setAnimation(correctCard, true)
                 delay(2200)
                 setAnimation(selectedCard, false)
-                if (selectedCard != correctCard) {
-                    setAnimation(correctCard, false)
-                }
-                delay(1500)
-                selectedCard = null
-                correctCard = null
-                viewModel.getNextQuiz()
+                setAnimation(correctCard, false)
             }
+
+            delay(1500)
+        }
+
+        selectedCard = null
+        correctCard = null
+        viewModel.getNextQuiz()
+        setClickableCard(true)
+        countDownTimer?.start()
+    }
+
+    private fun setClickableCard(isClickable: Boolean) {
+        val arrayCards = arrayListOf(
+            binding?.cvAnswer1,
+            binding?.cvAnswer2,
+            binding?.cvAnswer3,
+            binding?.cvAnswer4
+        )
+
+        for (card in arrayCards) {
+            card?.isClickable = isClickable
         }
     }
 
@@ -319,5 +363,10 @@ class QuizFragment : Fragment() {
         }
 
         animator.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer?.cancel()
     }
 }

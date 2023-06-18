@@ -15,8 +15,6 @@ class QuizViewModelProvider @Inject constructor(
     private val quizRepository: QuizRepository,
     private val settingsRepository: SettingsRepository,
     private val questionsRepository: QuestionsRepository,
-    private val userRepository: UserRepository,
-    private val preferencesRepository: UserPreferencesRepository,
     private val quizPresencesRepository: QuizPresencesRepository
 ) :
     ViewModelProvider.Factory {
@@ -27,8 +25,6 @@ class QuizViewModelProvider @Inject constructor(
             quizRepository,
             settingsRepository,
             questionsRepository,
-            userRepository,
-            preferencesRepository,
             quizPresencesRepository
         ) as T
     }

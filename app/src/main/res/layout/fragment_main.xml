@@ -152,15 +152,68 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <Button
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginTop="@dimen/d_16"
-        android:text="@string/start_quiz"
-        android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_statistics" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_statistics">
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/d_8"
+            android:text="@string/cont"
+            android:textAllCaps="true"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/d_8"
+            android:text="@string/start_quiz"
+            android:textAllCaps="true"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_favorite_tags"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/d_16"
+        app:cardElevation="@dimen/d_16"
+        app:shapeAppearanceOverlay="@style/RoundedTopCorner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_buttons">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/s_18"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="@string/your_favorite_themes"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_favorite_tags"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/d_8"/>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

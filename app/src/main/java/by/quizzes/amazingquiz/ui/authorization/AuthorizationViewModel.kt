@@ -7,8 +7,6 @@ import by.quizzes.amazingquiz.model.db.User
 import by.quizzes.amazingquiz.repository.FirebaseRepository
 import by.quizzes.amazingquiz.repository.UserPreferencesRepository
 import by.quizzes.amazingquiz.repository.UserRepository
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

@@ -11,7 +11,7 @@ interface QuestionsDao {
     suspend fun addQuestion(question: Questions): Long
 
     @Query("UPDATE questions SET user_answer = :userAnswer, score = :score WHERE question = :question AND quiz_id = :quizId")
-    suspend fun setUserAnswer(userAnswer: String, question: String?, score: Int?, quizId: Long)
+    suspend fun setUserAnswer(userAnswer: String?, question: String?, score: Int?, quizId: Long)
 
     @Query("SELECT SUM(score) FROM questions WHERE quiz_id = :quizId")
     suspend fun getSumOfScores(quizId: Long): Int?
@@ -25,4 +25,6 @@ interface QuestionsDao {
     @Query("SELECT * FROM questions WHERE quiz_id = :quizId")
     suspend fun getQuestions(quizId: Long): List<Questions>
 
+    @Query("SELECT id FROM questions WHERE quiz_id = :quizId AND question = :question")
+    suspend fun getQuestionId(quizId: Long, question: String?): Long
 }

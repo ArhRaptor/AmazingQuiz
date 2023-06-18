@@ -23,8 +23,6 @@ data class Questions(
     var userAnswer: String? = null,
     @ColumnInfo("difficulty")
     val difficulty: String,
-    @ColumnInfo("type")
-    val type: String,
     @ColumnInfo("score")
     var score: Int? = null,
     @ColumnInfo("quiz_id")

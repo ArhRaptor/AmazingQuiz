@@ -17,4 +17,5 @@
     <dimen name="s_25">25sp</dimen>
     <dimen name="btn_width">264dp</dimen>
     <dimen name="btn_height">54dp</dimen>
+    <dimen name="item_width">100dp</dimen>
 </resources>

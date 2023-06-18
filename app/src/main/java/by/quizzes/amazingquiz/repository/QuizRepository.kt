@@ -16,4 +16,6 @@ class QuizRepository @Inject constructor(private val api: QuizApi, private val q
     suspend fun setTotalScore(id:Long, totalScore: Int) = quizDao.setTotalScore(id, totalScore)
     suspend fun setQuizComplete(id: Long, isComplete: Boolean) = quizDao.setQuizComplete(id, isComplete)
     suspend fun getSumOfScore(userId: Long) = quizDao.getSumOfScores(userId)
+    suspend fun getIncompleteQuiz(userId: Long) = quizDao.getIncompleteQuiz(userId)
+    suspend fun deleteQuiz(quiz: DbQuiz) = quizDao.deleteQuiz(quiz)
 }

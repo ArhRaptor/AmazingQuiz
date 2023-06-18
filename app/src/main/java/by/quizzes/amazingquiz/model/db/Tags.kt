@@ -12,6 +12,11 @@ import androidx.room.PrimaryKey
         parentColumns = ["id"],
         childColumns = ["question_id"],
         onDelete = ForeignKey.CASCADE
+    ), ForeignKey(
+        entity = User::class,
+        parentColumns = ["id"],
+        childColumns = ["user_id"],
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class Tags(
@@ -19,6 +24,10 @@ data class Tags(
     val id: Long? = null,
     @ColumnInfo("tag")
     val tag: String,
+    @ColumnInfo("is_correct")
+    var isCorrect: Boolean? = null,
     @ColumnInfo("question_id")
-    val questionId: Long
+    val questionId: Long,
+    @ColumnInfo("user_id")
+    var userId: Long
 )
