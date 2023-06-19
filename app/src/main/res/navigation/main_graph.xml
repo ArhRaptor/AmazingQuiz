@@ -65,25 +65,7 @@
             android:id="@+id/action_registrationFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
         <action
-            android:id="@+id/action_registrationFragment_to_verificationFragment"
-            app:destination="@id/verificationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/verificationFragment"
-        tools:layout="@layout/fragment_verification"
-        android:name="by.quizzes.amazingquiz.ui.verification.VerificationFragment"
-        android:label="VerificationFragment" >
-        <action
-            android:id="@+id/action_verificationFragment_to_registrationStep2Fragment"
-            app:destination="@id/registrationStep2Fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/registrationStep2Fragment"
-        tools:layout="@layout/fragment_registration_step2"
-        android:name="by.quizzes.amazingquiz.ui.registrationstep2.RegistrationStep2Fragment"
-        android:label="RegistrationStep2Fragment" >
-        <action
-            android:id="@+id/action_registrationStep2Fragment_to_mainFragment"
+            android:id="@+id/action_registrationFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment

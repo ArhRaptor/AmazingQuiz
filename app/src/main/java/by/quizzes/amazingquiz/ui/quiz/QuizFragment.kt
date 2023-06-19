@@ -21,6 +21,7 @@ import androidx.navigation.fragment.findNavController
 import by.quizzes.amazingquiz.MyApp
 import by.quizzes.amazingquiz.R
 import by.quizzes.amazingquiz.databinding.FragmentQuizBinding
+import by.quizzes.amazingquiz.extensions.setAnswerCardText
 import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -89,7 +90,7 @@ class QuizFragment : Fragment() {
                         binding?.progressBar?.visibility = INVISIBLE
                         binding?.remainingTimeTextView?.text =
                             resources.getString(R.string.times_is_up)
-                        viewModel.setUserAnswer(currentQuestion, getCardText(selectedCard), getCardText(correctCard), currentDifficulty, isTimer)
+                        viewModel.setUserAnswer(currentQuestion, "", getCardText(correctCard), currentDifficulty, isTimer)
                         showCorrectAnswer()
                         binding?.progressBar?.visibility = VISIBLE
                     }
@@ -191,26 +192,33 @@ class QuizFragment : Fragment() {
         }
         viewModel.getQuiz()
 
+        val textArray = arrayListOf(
+            binding?.tvAnswer1,
+            binding?.tvAnswer2,
+            binding?.tvAnswer3,
+            binding?.tvAnswer4
+        )
+
         binding?.cvAnswer1?.setOnClickListener {
-            setAnswerCardText()
+            binding?.tvAnswer1?.setAnswerCardText(textArray)
             selectedCard = binding?.cvAnswer1
             binding?.btnNextQuiz?.isEnabled = true
         }
 
         binding?.cvAnswer2?.setOnClickListener {
-            setAnswerCardText()
+            binding?.tvAnswer2?.setAnswerCardText(textArray)
             selectedCard = binding?.cvAnswer2
             binding?.btnNextQuiz?.isEnabled = true
         }
 
         binding?.cvAnswer3?.setOnClickListener {
-            setAnswerCardText()
+            binding?.tvAnswer3?.setAnswerCardText(textArray)
             selectedCard = binding?.cvAnswer3
             binding?.btnNextQuiz?.isEnabled = true
         }
 
         binding?.cvAnswer4?.setOnClickListener {
-            setAnswerCardText()
+            binding?.tvAnswer4?.setAnswerCardText(textArray)
             selectedCard = binding?.cvAnswer4
             binding?.btnNextQuiz?.isEnabled = true
         }
@@ -259,15 +267,14 @@ class QuizFragment : Fragment() {
                 setAnimation(selectedCard, false)
                 setAnimation(correctCard, false)
             }
-
             delay(1500)
-        }
 
-        selectedCard = null
-        correctCard = null
-        viewModel.getNextQuiz()
-        setClickableCard(true)
-        countDownTimer?.start()
+            selectedCard = null
+            correctCard = null
+            viewModel.getNextQuiz()
+            setClickableCard(true)
+            countDownTimer?.start()
+        }
     }
 
     private fun setClickableCard(isClickable: Boolean) {
@@ -280,26 +287,6 @@ class QuizFragment : Fragment() {
 
         for (card in arrayCards) {
             card?.isClickable = isClickable
-        }
-    }
-
-    private fun setAnswerCardText() {
-
-        val textArray = arrayListOf(
-            binding?.tvAnswer1,
-            binding?.tvAnswer2,
-            binding?.tvAnswer3,
-            binding?.tvAnswer4
-        )
-
-        for (text in textArray) {
-            if (text?.id == this.id) {
-                text.setTextColor(resources.getColor(R.color.green, null))
-                text.textSize = 20f
-            } else {
-                text?.setTextColor(resources.getColor(R.color.black, null))
-                text?.textSize = 14f
-            }
         }
     }
 
@@ -365,8 +352,8 @@ class QuizFragment : Fragment() {
         animator.start()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         countDownTimer?.cancel()
     }
 }

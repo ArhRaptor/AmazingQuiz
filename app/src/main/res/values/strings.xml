@@ -49,12 +49,21 @@
     <string name="_0">0</string>
     <string name="your_favorite_themes">My favorite themes</string>
     <string name="cont">Continue</string>
-    <string name="yes">Yes, I Do!</string>
-    <string name="no">No, continue</string>
+    <string name="yes1">Yes</string>
+    <string name="yes2">Yes, I Do!</string>
+    <string name="no1">No</string>
+    <string name="no2">No, continue</string>
     <string name="difficulty_card">Difficulty:</string>
     <string name="meeting_text">I’ve been looking forward to meeting you. What is your name?</string>
     <string name="hello">Greetings, dear user!!!</string>
     <string name="nice_to_meet_you">Nice to meet you!</string>
     <string name="correct_difficulty">Choose the correct difficulty.</string>
     <string name="question_card">Question:</string>
+    <string name="exit">Exit</string>
+    <string name="close_app_message">You are about to exit the application. How do you want to do it?</string>
+    <string name="close_app">Close app</string>
+    <string name="logout">Logout</string>
+    <string name="photo">Photo?</string>
+    <string name="add_photo_message">Would you like to add a photo?</string>
+    <string name="attention">Attention!!!</string>
 </resources>

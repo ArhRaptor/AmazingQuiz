@@ -116,6 +116,13 @@ class MainViewModel(
         }
     }
 
+    fun addPhotoToDb(url: String?){
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.updateUser(url ,userPreferencesRepository.getUserUid())
+            getUser()
+        }
+    }
+
     private suspend fun getUserId(): Long {
         return userRepository.getUserId(userPreferencesRepository.getUserUid())
     }

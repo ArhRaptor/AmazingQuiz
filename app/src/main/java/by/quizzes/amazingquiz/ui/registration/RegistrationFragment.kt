@@ -46,7 +46,7 @@ class RegistrationFragment : Fragment() {
         binding?.tilPassword2?.setErrorNull()
 
         viewModel.openMainFragment = {
-            findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToVerificationFragment())
+            findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToMainFragment())
         }
 
         binding?.tvLogin?.setOnClickListener {

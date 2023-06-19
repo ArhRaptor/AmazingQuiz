@@ -20,11 +20,7 @@ class FirebaseRepository @Inject constructor(
 
         auth.signInWithEmailAndPassword(login, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                if (auth.currentUser?.isEmailVerified == true) {
-                    onSuccess(auth.currentUser!!.uid)
-                } else {
-                    onError("The account has not been verified. Check your mail!")
-                }
+                onSuccess(auth.currentUser!!.uid)
             } else {
                 onError(task.exception?.localizedMessage ?: "")
             }
@@ -44,33 +40,5 @@ class FirebaseRepository @Inject constructor(
                 onError(task.exception?.localizedMessage ?: "")
             }
         }
-    }
-
-    fun sentVerificationMessage(onSentMessage: (text: String) -> Unit) {
-        val user = auth.currentUser
-
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    onSentMessage("Account verification email has been sent!")
-                } else {
-                    onSentMessage(task.exception?.localizedMessage?: "")
-                }
-            }
-    }
-
-    fun isVerified() = auth.currentUser?.isEmailVerified
-
-    fun updateUser(name: String, surname: String) {
-        val user = auth.currentUser
-
-        val profileUpdates = userProfileChangeRequest {
-            displayName = "$name $surname"
-        }
-
-        user!!.updateProfile(profileUpdates)
-            .addOnCompleteListener { task ->
-
-            }
     }
 }
