@@ -67,12 +67,6 @@ class MainFragment : Fragment() {
                     result.data?.data?.let{imageUri->
                         viewModel.addPhotoToDb(getImageUrl(imageUri))
                     }
-
-/*                    val data: Intent? = result.data
-                    if (data != null && data.data != null) {
-                        val imageUri = data.data
-                        viewModel.addPhotoToDb(getImageUrl(imageUri))
-                    }*/
                 }
             }
         return binding?.root
