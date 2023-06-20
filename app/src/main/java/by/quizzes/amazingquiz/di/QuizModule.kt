@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+const val BASE_URL = "https://the-trivia-api.com/api/"
 
 @Module
 class QuizModule {
@@ -18,7 +19,7 @@ class QuizModule {
     fun provideApi(): QuizApi {
 
         return Retrofit.Builder()
-            .baseUrl("https://the-trivia-api.com/api/")
+            .baseUrl(BASE_URL)
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().apply {

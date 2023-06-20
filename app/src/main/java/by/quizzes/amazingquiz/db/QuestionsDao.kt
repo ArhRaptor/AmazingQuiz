@@ -25,6 +25,9 @@ interface QuestionsDao {
     @Query("SELECT * FROM questions WHERE quiz_id = :quizId")
     suspend fun getQuestions(quizId: Long): List<Questions>
 
+    @Query("SELECT * FROM questions WHERE quiz_id = :quizId AND user_answer ISNULL")
+    suspend fun getQuestionsForQuiz(quizId: Long): List<Questions>
+
     @Query("SELECT id FROM questions WHERE quiz_id = :quizId AND question = :question")
     suspend fun getQuestionId(quizId: Long, question: String?): Long
 }

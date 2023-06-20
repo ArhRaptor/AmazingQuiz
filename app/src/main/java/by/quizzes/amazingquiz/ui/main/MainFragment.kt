@@ -61,15 +61,20 @@ class MainFragment : Fragment() {
 
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
                 if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
+
+                    result.data?.data?.let{imageUri->
+                        viewModel.addPhotoToDb(getImageUrl(imageUri))
+                    }
+
+/*                    val data: Intent? = result.data
                     if (data != null && data.data != null) {
                         val imageUri = data.data
                         viewModel.addPhotoToDb(getImageUrl(imageUri))
-                    }
+                    }*/
                 }
             }
-
         return binding?.root
     }
 
@@ -99,11 +104,11 @@ class MainFragment : Fragment() {
 
                         var shouldDismissDialog = true
 
-                        if (name == "") {
+                        if (name.isBlank()) {
                             alertBinding.tilName.error = getString(R.string.empty_field)
                             shouldDismissDialog = false
                         }
-                        if (surname == "") {
+                        if (surname.isBlank()) {
                             alertBinding.tilSurname.error = getString(R.string.empty_field)
                             shouldDismissDialog = false
                         } else {

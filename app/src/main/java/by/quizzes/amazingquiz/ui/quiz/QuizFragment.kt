@@ -72,11 +72,14 @@ class QuizFragment : Fragment() {
                     progress = 100
                 }
 
-                val totalTime = 10000 // Общее время в миллисекундах
+                val totalTime = 15000 // Общее время в миллисекундах
                 val interval = 1000 // Интервал обновления прогресса в миллисекундах
 
                 countDownTimer = object : CountDownTimer(totalTime.toLong(), interval.toLong()) {
+
                     override fun onTick(millisUntilFinished: Long) {
+                        binding?.progressBar?.visibility = VISIBLE
+
                         val remainingTime =
                             millisUntilFinished / 1000
                         binding?.remainingTimeTextView?.text =
@@ -92,7 +95,6 @@ class QuizFragment : Fragment() {
                             resources.getString(R.string.times_is_up)
                         viewModel.setUserAnswer(currentQuestion, "", getCardText(correctCard), currentDifficulty, isTimer)
                         showCorrectAnswer()
-                        binding?.progressBar?.visibility = VISIBLE
                     }
                 }
 

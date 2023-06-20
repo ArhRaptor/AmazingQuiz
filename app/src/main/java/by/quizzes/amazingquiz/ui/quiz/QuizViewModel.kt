@@ -30,7 +30,7 @@ class QuizViewModel(
             val settings = settingsRepository.getSettings()
             isTimer.postValue(settings.timer)
 
-            val questionList = questionsRepository.getQuestions(quizPresencesRepository.getQuizId())
+            val questionList = questionsRepository.getQuestionsForQuiz(quizPresencesRepository.getQuizId())
 
             for (question in questionList) {
                 arrayQuiz.add(

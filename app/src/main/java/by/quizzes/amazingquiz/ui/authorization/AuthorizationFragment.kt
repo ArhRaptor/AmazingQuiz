@@ -51,10 +51,10 @@ class AuthorizationFragment : Fragment() {
             binding?.tilEmail?.setErrorNull()
             binding?.tilPassword?.setErrorNull()
             
-            if (email == "") {
+            if (email?.isBlank() == true) {
                 binding?.tilEmail?.error = getString(R.string.empty_field)
             }
-            if (password == ""){
+            if (password?.isBlank() == true){
                 binding?.tilPassword?.error = getString(R.string.empty_field)
             }else{
                 viewModel.openMainFragment ={
@@ -63,7 +63,9 @@ class AuthorizationFragment : Fragment() {
                 viewModel.errorText.observe(viewLifecycleOwner){
                     Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
                 }
-                viewModel.login(email!!, password!!)
+                if (email != null && password != null){
+                    viewModel.login(email, password)
+                }
             }
         }
 

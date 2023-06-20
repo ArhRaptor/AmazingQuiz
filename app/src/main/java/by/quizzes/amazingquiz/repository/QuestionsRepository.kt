@@ -27,6 +27,7 @@ class QuestionsRepository @Inject constructor(
     suspend fun getCountQuestion(quizId: Long) = questionsDao.getCountQuestion(quizId)
     suspend fun getCountCorrectAnswers(quizId: Long) = questionsDao.getCountCorrectAnswers(quizId)
     suspend fun getQuestions(quizId: Long) = questionsDao.getQuestions(quizId)
+    suspend fun getQuestionsForQuiz(quizId: Long) = questionsDao.getQuestionsForQuiz(quizId)
     suspend fun updateTags(questionId:Long, isCorrect: Boolean) = tagsDao.updateTags(questionId, isCorrect)
     suspend fun getTagsByQuestionId(questionId: Long?) = tagsDao.getTagsByQuestionId(questionId)
     suspend fun getQuestionId(quizId: Long, question: String?) = questionsDao.getQuestionId(quizId, question)
