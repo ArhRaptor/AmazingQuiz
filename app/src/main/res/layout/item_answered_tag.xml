@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/item_width"
+        android:layout_height="@dimen/item_width"
+        app:cardBackgroundColor="@color/background"
+        app:cardElevation="@dimen/d_8"
+        android:layout_margin="@dimen/d_8">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tag_name"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/d_8"
+                tools:text = "Sinema"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:layout_marginHorizontal="@dimen/d_16"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:id="@+id/tv_answers"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/d_8"
+                tools:text = "5"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

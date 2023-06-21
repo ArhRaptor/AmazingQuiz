@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EditTextStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/d_24</item>
+        <item name="android:layout_marginEnd">@dimen/d_24</item>
+        <item name="boxBackgroundColor">@color/et_background_color</item>
+    </style>
+
+    <style name="MainButton">
+        <item name="android:layout_width">@dimen/btn_width</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_marginBottom">@dimen/d_36</item>
+        <item name="textAllCaps">false</item>
+        <item name="cornerRadius">@dimen/d_20</item>
+    </style>
+
+    <style name="OnbordingImage">
+        <item name="android:layout_width">@dimen/d_0</item>
+        <item name="android:layout_height">@dimen/d_0</item>
+        <item name="android:layout_marginStart">@dimen/d_16</item>
+        <item name="android:layout_marginEnd">@dimen/d_16</item>
+        <item name="android:layout_marginTop">@dimen/d_8</item>
+        <item name="android:layout_marginBottom">@dimen/d_8</item>
+    </style>
+
+    <style name="TextViewSkip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/d_16</item>
+    </style>
+    
+    <style name="answer_card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/background</item>
+    </style>
+
+    <style name="_answer_card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
+    </style>
+
+    <style name="RoundedTopCorner" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">40dp</item>
+        <item name="cornerSizeTopLeft">40dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+</resources>
